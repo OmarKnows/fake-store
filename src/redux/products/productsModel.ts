@@ -6,3 +6,5 @@ export interface IProduct {
 	image: string;
 	category: string;
 }
+
+export type Product = Omit<IProduct, 'id'>;

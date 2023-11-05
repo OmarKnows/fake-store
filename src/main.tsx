@@ -4,9 +4,6 @@ import App from './App.tsx';
 import './index.css';
 import store from './redux/store.ts';
 import { Provider } from 'react-redux';
-import axios from 'axios';
-
-axios.defaults.baseURL = 'https://fakestoreapi.com/';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
