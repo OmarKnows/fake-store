@@ -1,3 +1,4 @@
+import ProductCard from '@/components/ProductCard';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { getProducts } from '@/redux/products/products.slice';
 import { RootState } from '@/redux/store';
@@ -15,13 +16,15 @@ const ProductsPage = () => {
 		<div>
 			{loading && <p>Loading...</p>}
 			{error && <p>Error: {error}</p>}
-			{products?.map((product) => (
-				<div key={product.id}>
-					<h2>{product?.title}</h2>
-					<p>Price: ${product?.price}</p>
-					<p>Description: {product?.description}</p>
+			{!loading && !error ? (
+				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-3	'>
+					{products?.map((product) => (
+						<ProductCard product={product} />
+					))}
 				</div>
-			))}
+			) : (
+				<></>
+			)}
 		</div>
 	);
 };
