@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { IProduct, Product } from './productsModel';
-import api from '@/lib/api';
+import api from '@/utils/api';
 
 const getProducts = async (): Promise<AxiosResponse> => {
 	return await api.get('products');
