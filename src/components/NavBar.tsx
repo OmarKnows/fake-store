@@ -1,7 +1,17 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../assets/logo.svg';
 
 const NavBar = () => {
-	return <div>NavBar</div>;
+	return (
+		<div className='flex justify-center items-center gap-6 border border-stroke font-semibold p-5'>
+			<img src={logo} />
+			<Link to={'/products'}>Products</Link>
+			<Link to={'/login'}>Login</Link>
+
+			<div>Cart</div>
+			<div>Profile</div>
+		</div>
+	);
 };
 
 export default NavBar;
