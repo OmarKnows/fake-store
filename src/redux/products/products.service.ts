@@ -6,7 +6,7 @@ const getProducts = async (): Promise<AxiosResponse> => {
 	return await api.get('products');
 };
 
-const getProduct = async (id: number) => {
+const getProduct = async (id: string) => {
 	return await api.get(`products/${id}`);
 };
 
@@ -22,7 +22,7 @@ const updateProduct = async (product: IProduct) => {
 	});
 };
 
-const deleteProduct = async (id: number) => {
+const deleteProduct = async (id: string) => {
 	return await api.delete(`products/${id}`);
 };
 

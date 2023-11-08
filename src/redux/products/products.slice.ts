@@ -26,7 +26,7 @@ export const getProducts = createAsyncThunk('getProducts', async () => {
 	}
 });
 
-export const getProduct = createAsyncThunk('getProduct', async (id: number) => {
+export const getProduct = createAsyncThunk('getProduct', async (id: string) => {
 	try {
 		return (await productServices.getProduct(id)).data;
 	} catch (error) {
@@ -53,7 +53,7 @@ export const updateProduct = createAsyncThunk('updateProduct', async (product: I
 	}
 });
 
-export const deleteProduct = createAsyncThunk('deleteProduct', async (id: number) => {
+export const deleteProduct = createAsyncThunk('deleteProduct', async (id: string) => {
 	try {
 		return (await productServices.deleteProduct(id)).data;
 	} catch (error) {
