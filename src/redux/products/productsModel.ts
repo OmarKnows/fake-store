@@ -1,3 +1,8 @@
+export interface Rating {
+	count: number;
+	rate: number;
+}
+
 export interface IProduct {
 	id: number;
 	title: string;
@@ -5,6 +10,7 @@ export interface IProduct {
 	description: string;
 	image: string;
 	category: string;
+	rating: Rating;
 }
 
-export type Product = Omit<IProduct, 'id'>;
+export type Product = Omit<IProduct, 'id, rating'>;
