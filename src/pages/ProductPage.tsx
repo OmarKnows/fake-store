@@ -23,9 +23,9 @@ const ProductPage = () => {
 			{loading && <p>Loading...</p>}
 			{error && <p>Error: {error}</p>}
 			{!loading && !error ? (
-				<div className='flex justify-center items-center mt-[15vh] mx-[20vw] bg-white rounded-xl'>
+				<div className='flex justify-center items-center mt-[15vh] mx-[20vw] bg-gray-100 rounded-xl'>
 					<div className='flex items-center rounded'>
-						<div className='h-74 w-full flex items-center justify-center overflow-hidden'>
+						<div className='h-74 w-full flex items-center justify-center p-5 overflow-hidden rounded-xl'>
 							<img className='h-full w-full object-cover' src={product?.image} />
 						</div>
 						<div className='text-center px-5'>

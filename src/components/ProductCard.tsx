@@ -13,7 +13,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ product }) => {
 		<Link to={`${product.id}`}>
 			<Card>
 				<CardContent>
-					<div className='h-64 w-full min-w-[10rem] max-w-[18rem] flex items-center justify-center overflow-hidden'>
+					<div className='h-64 w-full min-w-[10rem] max-w-[18rem] flex items-center justify-center overflow-hidden rounded-xl'>
 						<img className='h-full w-full object-cover' src={product.image} />
 					</div>
 				</CardContent>
