@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { getProduct } from '@/redux/products/products.slice';
 import { useParams } from 'react-router-dom';
 import { RootState } from '@/redux/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ProductRating from '@/components/ProductRating';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,9 +12,10 @@ const ProductPage = () => {
 	const { product, loading, error } = useAppSelector((state: RootState) => state.products);
 	const { id } = useParams();
 
+	const [quantity, setQuantity] = useState<number>(0);
+
 	useEffect(() => {
 		id && dispatch(getProduct(id));
-		console.log(product);
 	}, [dispatch]);
 
 	return (
@@ -38,7 +39,7 @@ const ProductPage = () => {
 							</div>
 							<div className='flex justify-between my-10'>
 								<div className='text-2xl items-center'>
-									<Input type='number' />
+									<Input type='number' value={quantity} onChange={(e) => setQuantity(+e.target.value)} min={0} />
 								</div>
 								<div className='text-2xl'>
 									<Button>Add To Cart</Button>
