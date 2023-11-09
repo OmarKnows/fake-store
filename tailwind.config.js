@@ -15,9 +15,6 @@ export const theme = {
 		},
 	},
 	extend: {
-		color: {
-			stroke: '#CACDD8',
-		},
 		keyframes: {
 			'accordion-down': {
 				from: { height: 0 },

@@ -13,19 +13,21 @@ const ProductCard: React.FC<IProductCardProps> = ({ product }) => {
 		<Link to={`${product.id}`}>
 			<Card>
 				<CardContent>
-					<div className='h-64 flex justify-center'>
-						<img className='h-full' src={product.image} />
+					<div className='h-64 w-full min-w-[10rem] max-w-[18rem] flex items-center justify-center overflow-hidden'>
+						<img className='h-full w-full object-cover' src={product.image} />
 					</div>
 				</CardContent>
 				<CardHeader>
-					<h2 className='truncate'>{product?.title}</h2>
+					<div className='flex justify-between'>
+						<h2 className='truncate'>{product?.title}</h2>
+					</div>
 				</CardHeader>
 				<CardDescription>
 					<p className='truncate'>{product?.description}</p>
 				</CardDescription>
 				<CardFooter className='flex justify-between'>
 					<ProductRating value={product.rating} />
-					<p>Price: ${product?.price}</p>
+					<p className='font-semibold'>Price: ${product?.price}</p>
 				</CardFooter>
 			</Card>
 		</Link>

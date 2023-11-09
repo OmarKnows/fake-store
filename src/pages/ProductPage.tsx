@@ -22,16 +22,16 @@ const ProductPage = () => {
 			{loading && <p>Loading...</p>}
 			{error && <p>Error: {error}</p>}
 			{!loading && !error ? (
-				<div className='flex justify-center mt-[15vh] '>
-					<div className='flex border border-1 border-gray-300'>
-						<div className='w-60 border border-1 border-gray-300 p-5'>
-							<img className='w-100 h-100 object-contain' src={product?.image} />
+				<div className='flex justify-center items-center mt-[15vh] mx-[20vw] bg-white rounded-xl'>
+					<div className='flex items-center rounded'>
+						<div className='h-74 w-full flex items-center justify-center overflow-hidden'>
+							<img className='h-full w-full object-cover' src={product?.image} />
 						</div>
 						<div className='text-center px-5'>
 							<p className='text-3xl font-bold mt-5'>{product?.title}</p>
-							<p className='my-10'>Description: {product?.description}</p>
+							<p className='my-10 '>Description: {product?.description}</p>
 							<div className='flex justify-between my-10'>
-								<div className='text-2xl items-center'>${product?.price}</div>
+								<div className='text-2xl items-center '>${product?.price}</div>
 								<div className='text-2xl'>
 									<ProductRating value={product?.rating} />
 								</div>

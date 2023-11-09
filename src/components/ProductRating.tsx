@@ -17,11 +17,11 @@ const ProductRating: React.FC<IRatingProps> = ({
 	const getStarIcon = (rating: number) => {
 		switch (true) {
 			case rating >= 1:
-				return <FaStar />;
+				return <FaStar color={'yellow'} />;
 			case rating >= 0.5:
-				return <FaRegStarHalfStroke />;
+				return <FaRegStarHalfStroke color={'yellow'} />;
 			default:
-				return <FaRegStar />;
+				return <FaRegStar color={'yellow'} />;
 		}
 	};
 

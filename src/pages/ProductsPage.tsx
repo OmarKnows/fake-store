@@ -17,14 +17,16 @@ const ProductsPage = () => {
 		<div>
 			{loading && <p>Loading...</p>}
 			{error && <p>Error: {error}</p>}
-			<h1 className='font-bold text-3xl p-3'>Products</h1>
 			{!loading && !error ? (
-				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-3	'>
-					{products?.map((product) => (
-						<div key={product.id}>
-							<ProductCard product={product} />
-						</div>
-					))}
+				<div>
+					<h1 className='font-bold text-3xl p-3'>Products</h1>
+					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-3	'>
+						{products?.map((product) => (
+							<div key={product.id}>
+								<ProductCard product={product} />
+							</div>
+						))}
+					</div>
 				</div>
 			) : (
 				<></>
