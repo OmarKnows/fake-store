@@ -31,7 +31,7 @@ const LoginPage = () => {
 							<Button className='h-14 w-56'>Login Now</Button>
 						</div>
 						<div>
-							<Button className='h-12 w-56' variant='secondary'>
+							<Button className='h-12 w-56' variant='outline'>
 								Create Account
 							</Button>
 						</div>

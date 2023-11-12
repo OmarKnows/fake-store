@@ -17,6 +17,8 @@ export const theme = {
 	extend: {
 		colors: {
 			stroke: '#575757',
+			dark: '#060606F7',
+			active: '#FFF618',
 		},
 		fontFamily: {
 			roboto: ['Roboto', 'sans-serif'],
