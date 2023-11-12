@@ -1,41 +1,51 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import login_Splash from '../assets/login_splash.png';
+import email from '../assets/email.png';
+import password from '../assets/password.png';
+import google from '../assets/google.png';
+import facebook from '../assets/facebook.png';
+import twitter from '../assets/twitter.png';
+import { Checkbox } from '@/components/ui/checkbox';
 
 const LoginPage = () => {
 	return (
-		<div>
-			<h1 className='font-bold text-3xl p-3'>Login</h1>
-
-			<div className='flex justify-center gap-5'>
-				<Card className='p-5'>
-					<CardTitle>Registered Customers</CardTitle>
-					<CardHeader className='mt-5 text-xs'>If you have an account sign in with your email address.</CardHeader>
-					<CardContent>
-						<form>
-							<label>Email</label>
-							<Input className='my-5' type='email' />
-							<label>Password</label>
-							<Input className='my-5' type='Password' />
-							<Button className='text center w-full'>Sign In</Button>
-						</form>
-					</CardContent>
-				</Card>
-				<div></div>
-				<Card className='p-5'>
-					<CardTitle>New Customer?</CardTitle>
-					<CardHeader className='mt-5 text-xs'>
-						Creating an account has many benefits:
-						<ul className=' mt-3 list-disc'>
-							<li>Checkout faster</li>
-							<li>Keep more than one address</li>
-							<li>Track orders and more</li>
-						</ul>
-					</CardHeader>
-					<CardContent>
-						<Button className='text center w-full'>Create An Account</Button>
-					</CardContent>
-				</Card>
+		<div className='flex'>
+			<div className='w-1/2 flex justify-center text-center '>
+				<div>
+					<div className='font-medium text-4xl mt-40'>Welcome Back</div>
+					<div className='font-light text-[21px] text-stroke mt-10 w-[460px]'>
+						To keep connected with us please login with your personal information by email and password
+					</div>
+					<form className='mt-20'>
+						<Input type='text' placeholder='Email Address' img={email} />
+						<Input type='password' placeholder='Password' img={password} className='mt-14' />
+						<div className='flex justify justify-between mt-8 font-light text-stroke text-[21px]'>
+							<div className='flex items-center'>
+								<Checkbox className='me-1' />
+								<div>Remember Me</div>
+							</div>
+							<div>Forgot Password?</div>
+						</div>
+						<div className='mt-8 mb-4'>
+							<Button className='h-14 w-56'>Login Now</Button>
+						</div>
+						<div>
+							<Button className='h-12 w-56' variant='secondary'>
+								Create Account
+							</Button>
+						</div>
+					</form>
+					<div className='mt-9 font-light text-stroke text-[21px] text-start'>or you can join with</div>
+					<div className='flex justify-center gap-8 mt-6'>
+						<img src={google} />
+						<img src={facebook} />
+						<img src={twitter} />
+					</div>
+				</div>
+			</div>
+			<div className='w-1/2'>
+				<img className='w-full ' src={login_Splash} />
 			</div>
 		</div>
 	);

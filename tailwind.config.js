@@ -15,6 +15,12 @@ export const theme = {
 		},
 	},
 	extend: {
+		colors: {
+			stroke: '#575757',
+		},
+		fontFamily: {
+			roboto: ['Roboto', 'sans-serif'],
+		},
 		keyframes: {
 			'accordion-down': {
 				from: { height: 0 },
