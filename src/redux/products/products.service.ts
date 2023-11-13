@@ -26,11 +26,16 @@ const deleteProduct = async (id: string) => {
 	return await api.delete(`products/${id}`);
 };
 
+const getCategories = async () => {
+	return await api.get('products/categories');
+};
+
 const productServices = {
 	getProducts,
 	getProduct,
 	addProduct,
 	updateProduct,
 	deleteProduct,
+	getCategories,
 };
 export default productServices;

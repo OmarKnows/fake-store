@@ -14,7 +14,8 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
 	const settings = {
 		dots: true,
 		infinite: true,
-		speed: 500,
+		speed: 1000,
+		autoplay: true,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		prevArrow: <PrevArrow onClick={() => slider?.slickPrev()} />,

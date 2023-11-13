@@ -1,31 +1,55 @@
+import Carousel from '@/components/Carousel/Carousel';
 import ProductCard from '@/components/ProductCard';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
-import { getProducts } from '@/redux/products/products.slice';
+import { getCategories, getProducts } from '@/redux/products/products.slice';
 import { RootState } from '@/redux/store';
 import { useEffect } from 'react';
+import carousel1 from '@/assets/carousel1.avif';
+import carousel2 from '@/assets/carousel2.avif';
+import carousel3 from '@/assets/carousel3.avif';
+import { Link } from 'react-router-dom';
 
 const ProductsPage = () => {
 	const dispatch = useAppDispatch();
-	const { products, loading, error } = useAppSelector((state: RootState) => state.products);
+	const { products, categories, loading, error } = useAppSelector((state: RootState) => state.products);
 
 	useEffect(() => {
 		dispatch(getProducts());
+		dispatch(getCategories());
 	}, [dispatch]);
 
 	return (
 		<div>
+			<Carousel
+				items={[
+					<img className='h-full w-full object-cover' src={carousel1} key={1} />,
+					<img className='h-full w-full object-cover' src={carousel2} key={2} />,
+					<img className='h-full w-full object-cover' src={carousel3} key={3} />,
+				]}
+			/>
 			{loading && <p>Loading...</p>}
 			{error && <p>Error: {error}</p>}
 			{!loading && !error ? (
 				<div>
-					<h1 className='font-bold text-3xl p-3'>Products</h1>
-					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-3	'>
-						{products?.map((product) => (
-							<div key={product.id}>
-								<ProductCard product={product} />
+					{categories?.map((category, index) => (
+						<div key={index} className='my-5'>
+							<div className='flex justify-between px-24 mb-1'>
+								<h1 className='font-light text-3xl '>{category}</h1>
+								<Link to={category}>View All</Link>
 							</div>
-						))}
-					</div>
+							<hr className='mx-9' />
+							<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-10 mx-24'>
+								{products
+									?.filter((product) => product.category === category)
+									.map((product) => (
+										<div key={product.id}>
+											<ProductCard product={product} />
+										</div>
+									))
+									.slice(0, 4)}
+							</div>
+						</div>
+					))}
 				</div>
 			) : (
 				<></>

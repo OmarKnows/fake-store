@@ -6,12 +6,14 @@ import { AxiosError } from 'axios';
 interface IProductsState {
 	products: IProduct[];
 	product: IProduct | null;
+	categories: string[];
 	loading: boolean;
 	error: string | null;
 }
 
 const initialState: IProductsState = {
 	products: [],
+	categories: [],
 	product: null,
 	loading: false,
 	error: null,
@@ -56,6 +58,15 @@ export const updateProduct = createAsyncThunk('updateProduct', async (product: I
 export const deleteProduct = createAsyncThunk('deleteProduct', async (id: string, { rejectWithValue }) => {
 	try {
 		return (await productServices.deleteProduct(id)).data;
+	} catch (error) {
+		const err = error as AxiosError;
+		return rejectWithValue(err.response?.data);
+	}
+});
+
+export const getCategories = createAsyncThunk('getCategories', async (_, { rejectWithValue }) => {
+	try {
+		return (await productServices.getCategories()).data;
 	} catch (error) {
 		const err = error as AxiosError;
 		return rejectWithValue(err.response?.data);
@@ -120,6 +131,17 @@ const productsSlice = createSlice({
 				state.product = action.payload;
 			})
 			.addCase(deleteProduct.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.payload as string | null;
+			})
+			.addCase(getCategories.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(getCategories.fulfilled, (state, action) => {
+				state.loading = false;
+				state.categories = action.payload;
+			})
+			.addCase(getCategories.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.payload as string | null;
 			});
