@@ -10,7 +10,6 @@ const ProductsPage = () => {
 
 	useEffect(() => {
 		dispatch(getProducts());
-		console.log(products);
 	}, [dispatch]);
 
 	return (

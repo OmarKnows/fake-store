@@ -14,7 +14,7 @@ const NavBar = () => {
 				<NavLink className={({ isActive }) => (isActive ? 'text-active font-black' : 'font-black')} to='/contact-us'>
 					Contact us
 				</NavLink>
-				<NavLink className={({ isActive }) => (isActive ? 'text-active font-black' : 'font-black')} to='/login'>
+				<NavLink className={({ isActive }) => (isActive ? 'text-active font-black' : 'font-black')} to='/'>
 					Login
 				</NavLink>
 				<Button className='w-36 h-10 me-28' variant='secondary'>

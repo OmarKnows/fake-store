@@ -7,8 +7,29 @@ import google from '../assets/google.png';
 import facebook from '../assets/facebook.png';
 import twitter from '../assets/twitter.png';
 import { Checkbox } from '@/components/ui/checkbox';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { IAuth } from '@/redux/auth/authModel';
+import { login } from '@/redux/auth/auth.slice';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { RootState } from '@/redux/store';
 
 const LoginPage = () => {
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const { token, error } = useAppSelector((state: RootState) => state.auth);
+	const { register, handleSubmit } = useForm<IAuth>();
+
+	const onlogin: SubmitHandler<IAuth> = (data) => {
+		dispatch(login(data));
+		console.log(error);
+	};
+
+	useEffect(() => {
+		if (token) navigate('/products');
+	}, [navigate, token]);
+
 	return (
 		<div className='flex'>
 			<div className='w-1/2 flex justify-center text-center '>
@@ -17,9 +38,9 @@ const LoginPage = () => {
 					<div className='font-light text-[21px] text-stroke mt-10 w-[460px]'>
 						To keep connected with us please login with your personal information by email and password
 					</div>
-					<form className='mt-20'>
-						<Input type='text' placeholder='Email Address' img={email} />
-						<Input type='password' placeholder='Password' img={password} className='mt-14' />
+					<form className='mt-20' onSubmit={handleSubmit(onlogin)}>
+						<Input type='text' placeholder='Username' img={email} {...register('username')} />
+						<Input type='password' placeholder='Password' img={password} className='mt-14' {...register('password')} />
 						<div className='flex justify justify-between mt-8 font-light text-stroke text-[21px]'>
 							<div className='flex items-center'>
 								<Checkbox className='me-1' />
@@ -28,7 +49,9 @@ const LoginPage = () => {
 							<div>Forgot Password?</div>
 						</div>
 						<div className='mt-8 mb-4'>
-							<Button className='h-14 w-56'>Login Now</Button>
+							<Button className='h-14 w-56' type='submit'>
+								Login Now
+							</Button>
 						</div>
 						<div>
 							<Button className='h-12 w-56' variant='outline'>
