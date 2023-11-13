@@ -17,48 +17,48 @@ const initialState: IProductsState = {
 	error: null,
 };
 
-export const getProducts = createAsyncThunk('getProducts', async () => {
+export const getProducts = createAsyncThunk('getProducts', async (_, { rejectWithValue }) => {
 	try {
 		return (await productServices.getProducts()).data;
 	} catch (error) {
 		const err = error as AxiosError;
-		throw err;
+		return rejectWithValue(err.response?.data);
 	}
 });
 
-export const getProduct = createAsyncThunk('getProduct', async (id: string) => {
+export const getProduct = createAsyncThunk('getProduct', async (id: string, { rejectWithValue }) => {
 	try {
 		return (await productServices.getProduct(id)).data;
 	} catch (error) {
 		const err = error as AxiosError;
-		throw err;
+		return rejectWithValue(err.response?.data);
 	}
 });
 
-export const addProduct = createAsyncThunk('addProduct', async (product: Product) => {
+export const addProduct = createAsyncThunk('addProduct', async (product: Product, { rejectWithValue }) => {
 	try {
 		return (await productServices.addProduct(product)).data;
 	} catch (error) {
 		const err = error as AxiosError;
-		throw err;
+		return rejectWithValue(err.response?.data);
 	}
 });
 
-export const updateProduct = createAsyncThunk('updateProduct', async (product: IProduct) => {
+export const updateProduct = createAsyncThunk('updateProduct', async (product: IProduct, { rejectWithValue }) => {
 	try {
 		return (await productServices.updateProduct(product)).data;
 	} catch (error) {
 		const err = error as AxiosError;
-		throw err;
+		return rejectWithValue(err.response?.data);
 	}
 });
 
-export const deleteProduct = createAsyncThunk('deleteProduct', async (id: string) => {
+export const deleteProduct = createAsyncThunk('deleteProduct', async (id: string, { rejectWithValue }) => {
 	try {
 		return (await productServices.deleteProduct(id)).data;
 	} catch (error) {
 		const err = error as AxiosError;
-		throw err;
+		return rejectWithValue(err.response?.data);
 	}
 });
 
@@ -77,7 +77,7 @@ const productsSlice = createSlice({
 			})
 			.addCase(getProducts.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.error.message ?? 'Failed to fetch products';
+				state.error = action.payload as string | null;
 			})
 			.addCase(getProduct.pending, (state) => {
 				state.loading = true;
@@ -88,7 +88,7 @@ const productsSlice = createSlice({
 			})
 			.addCase(getProduct.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.error.message ?? 'Failed to fetch product';
+				state.error = action.payload as string | null;
 			})
 			.addCase(addProduct.pending, (state) => {
 				state.loading = true;
@@ -99,7 +99,7 @@ const productsSlice = createSlice({
 			})
 			.addCase(addProduct.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.error.message ?? 'Failed to add product';
+				state.error = action.payload as string | null;
 			})
 			.addCase(updateProduct.pending, (state) => {
 				state.loading = true;
@@ -110,7 +110,7 @@ const productsSlice = createSlice({
 			})
 			.addCase(updateProduct.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.error.message ?? 'Failed to update product';
+				state.error = action.payload as string | null;
 			})
 			.addCase(deleteProduct.pending, (state) => {
 				state.loading = true;
@@ -121,7 +121,7 @@ const productsSlice = createSlice({
 			})
 			.addCase(deleteProduct.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.error.message ?? 'Failed to delete product';
+				state.error = action.payload as string | null;
 			});
 	},
 });
