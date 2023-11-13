@@ -1,4 +1,5 @@
 import NavBar from '@/components/NavBar';
+import HomePage from '@/pages/HomePage';
 import LoginPage from '@/pages/LoginPage';
 import ProductPage from '@/pages/ProductPage';
 import ProductsPage from '@/pages/ProductsPage';
@@ -18,6 +19,7 @@ export const router = createBrowserRouter(
 			<Route index path='/' element={<LoginPage />} />
 			<Route path='/products' element={<ProductsPage />} />
 			<Route path='/products/:id' element={<ProductPage />} />
+			<Route path='/home' element={<HomePage />} />
 		</Route>
 	)
 );
