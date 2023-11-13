@@ -22,12 +22,10 @@ const ProductCard: React.FC<IProductCardProps> = ({ product }) => {
 						<h2 className='truncate'>{product?.title}</h2>
 					</div>
 				</CardHeader>
-				<CardDescription>
-					<p className='truncate'>{product?.description}</p>
-				</CardDescription>
+				<CardDescription className='truncate'>{product?.description}</CardDescription>
 				<CardFooter className='flex justify-between'>
 					<ProductRating value={product.rating} />
-					<p className='font-semibold'>Price: ${product?.price}</p>
+					<div className='font-semibold'>Price: ${product?.price}</div>
 				</CardFooter>
 			</Card>
 		</Link>
