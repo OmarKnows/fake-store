@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import ProductRating from '@/components/ProductRating';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { GoCheck } from 'react-icons/go';
+import { cn } from '@/lib/utils';
 
 const ProductPage = () => {
 	const dispatch = useAppDispatch();
@@ -13,39 +15,62 @@ const ProductPage = () => {
 	const { id } = useParams();
 
 	const [quantity, setQuantity] = useState<number>(0);
+	const [selectedImg, setSelectedimg] = useState<number>(1);
 
 	useEffect(() => {
 		id && dispatch(getProduct(id));
-	}, [dispatch]);
+	}, []);
 
 	return (
 		<div>
 			{loading && <p>Loading...</p>}
 			{error && <p>Error: {error}</p>}
 			{!loading && !error ? (
-				<div className='flex justify-center items-center mt-[15vh] mx-[20vw] bg-gray-100 rounded-xl'>
-					<div className='flex items-center rounded'>
-						<div className='h-74 w-full flex items-center justify-center p-5 overflow-hidden rounded-xl'>
-							<img className='h-full w-full object-cover' src={product?.image} />
+				<div className='flex justify-center mt-20 items-center'>
+					<div className='[&>*]:overflow-hidden [&>*]:w-[155px] [&>*]:h-[135px] flex flex-col justify-between h-full gap-[10px] me-[14px]'>
+						<div onClick={() => setSelectedimg(1)} className={cn('cursor-pointer', selectedImg === 1 ? 'border' : '')}>
+							<img className='w-full h-full object-contain' src={product?.image} />
 						</div>
-						<div className='text-center px-5'>
-							<p className='text-3xl font-bold mt-5'>{product?.title}</p>
-							<p className='my-10 '>Description: {product?.description}</p>
-							<div className='flex justify-between my-10'>
-								<div className='text-2xl items-center '>${product?.price}</div>
-								<div className='text-2xl'>
-									<ProductRating value={product?.rating} />
-								</div>
-							</div>
-							<div className='flex justify-between my-10'>
-								<div className='text-2xl items-center'>
-									<Input type='number' value={quantity} onChange={(e) => setQuantity(+e.target.value)} min={0} />
-								</div>
-								<div className='text-2xl'>
-									<Button>Add To Cart</Button>
-								</div>
+						<div onClick={() => setSelectedimg(2)} className={cn('cursor-pointer', selectedImg === 2 ? 'border' : '')}>
+							<img className='w-full h-full object-contain' src={product?.image} />
+						</div>
+						<div onClick={() => setSelectedimg(3)} className={cn('cursor-pointer', selectedImg === 3 ? 'border' : '')}>
+							<img className='w-full h-full object-contain' src={product?.image} />
+						</div>
+						<div onClick={() => setSelectedimg(4)} className={cn('cursor-pointer', selectedImg === 4 ? 'border' : '')}>
+							<img className='w-full h-full object-contain' src={product?.image} />
+						</div>
+					</div>
+					<div className='w-[584px] h-[571px] border border-gray-300 me-10'>
+						<img className='w-full h-full object-contain' src={product?.image} />
+					</div>
+					<div className='w-[494px]'>
+						<div className='font-semibold text-gray-900 mb-2'>{product?.title}</div>
+						<div className='font-semibold text-sm text-gray-600 mb-4'>{product?.description}</div>
+						<div className='flex items-center gap-32'>
+							<div className='font-semibold text-sm text-gray-600'>item #: {product?.id}</div>
+							<ProductRating value={product?.rating} />
+						</div>
+						<div className='ms-3 my-6 text-xl font-medium'>${product?.price}</div>
+						<div className='text-green-600 text-sm font-bold'>Order now and get it around Tuesday, January 17</div>
+						<div className='flex text-sm my-6'>
+							<div className='font-medium'>Availability :</div>
+							<div className='flex text-green-600 items-center ms-1'>
+								<div>In Stock</div>
+								<GoCheck color='green' />
 							</div>
 						</div>
+						<div className='flex items-center mb-6 gap-11'>
+							<Input
+								className='w-[168px] h-[47px]'
+								type='number'
+								min={0}
+								value={quantity}
+								onChange={(e) => setQuantity(+e.target.value)}
+							/>
+							<Button className='w-[168px] h-[47px] rounded-lg font-bold'>Add to Cart</Button>
+						</div>
+						<hr />
 					</div>
 				</div>
 			) : (

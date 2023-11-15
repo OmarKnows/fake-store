@@ -17,20 +17,20 @@ const ProductRating: React.FC<IRatingProps> = ({
 	const getStarIcon = (rating: number) => {
 		switch (true) {
 			case rating >= 1:
-				return <FaStar color={'yellow'} />;
+				return <FaStar color={'orange'} />;
 			case rating >= 0.5:
-				return <FaRegStarHalfStroke color={'yellow'} />;
+				return <FaRegStarHalfStroke color={'orange'} />;
 			default:
-				return <FaRegStar color={'yellow'} />;
+				return <FaRegStar color={'gray'} />;
 		}
 	};
 
 	return (
-		<div className='flex items-center'>
+		<div className='flex'>
 			{ratings.map((rating, index) => (
 				<div key={index}>{getStarIcon(value.rate - rating + 1)}</div>
 			))}
-			<div className='ml-2'>Reviews ({value.count})</div>
+			<div className='ms-1 italic text-gray-400 text-sm'>{value.count}</div>
 		</div>
 	);
 };
