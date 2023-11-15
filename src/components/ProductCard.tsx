@@ -16,15 +16,13 @@ const ProductCard: React.FC<IProductCardProps> = ({ product }) => {
 						<img className='h-full w-full object-cover' src={product.image} />
 					</div>
 				</CardContent>
-				<CardHeader className='mt-3'>
-					<h2 className='truncate font-semibold text-lg'>{product?.title}</h2>
+				<CardHeader className='mt-3 text-center font-semibold text-lg'>
+					<p className='truncate '>{product?.title}</p>
 				</CardHeader>
 				<CardDescription className='truncate font-light text-xs text-center px-8 mt-1'>
 					{product?.description}
 				</CardDescription>
-				<CardFooter className='mt-3'>
-					<div className='font-normal text-2xl text-center'>${product?.price}</div>
-				</CardFooter>
+				<CardFooter className='mt-3 font-normal text-2xl text-center'>${product?.price}</CardFooter>
 			</Card>
 		</Link>
 	);

@@ -35,7 +35,9 @@ const ProductsPage = () => {
 						<div key={index} className='my-5'>
 							<div className='flex justify-between px-24 mb-1'>
 								<h1 className='font-light text-3xl '>{category}</h1>
-								<Link to={category}>View All</Link>
+								<Link className='font-light text-xl underline text-gray-600' to={'category/' + category}>
+									View All
+								</Link>
 							</div>
 							<hr className='mx-9' />
 							<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-10 mx-24'>
