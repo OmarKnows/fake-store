@@ -81,9 +81,11 @@ const productsSlice = createSlice({
 		builder
 			.addCase(getProducts.pending, (state) => {
 				state.loading = true;
+				state.error = null;
 			})
 			.addCase(getProducts.fulfilled, (state, action) => {
 				state.loading = false;
+				state.error = null;
 				state.products = action.payload;
 			})
 			.addCase(getProducts.rejected, (state, action) => {
@@ -92,9 +94,11 @@ const productsSlice = createSlice({
 			})
 			.addCase(getProduct.pending, (state) => {
 				state.loading = true;
+				state.error = null;
 			})
 			.addCase(getProduct.fulfilled, (state, action) => {
 				state.loading = false;
+				state.error = null;
 				state.product = action.payload;
 			})
 			.addCase(getProduct.rejected, (state, action) => {
@@ -136,9 +140,11 @@ const productsSlice = createSlice({
 			})
 			.addCase(getCategories.pending, (state) => {
 				state.loading = true;
+				state.error = null;
 			})
 			.addCase(getCategories.fulfilled, (state, action) => {
 				state.loading = false;
+				state.error = null;
 				state.categories = action.payload;
 			})
 			.addCase(getCategories.rejected, (state, action) => {

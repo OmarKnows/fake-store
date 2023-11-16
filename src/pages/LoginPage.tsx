@@ -14,16 +14,16 @@ import { login } from '@/redux/auth/auth.slice';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '@/redux/store';
+import BeatLoader from 'react-spinners/BeatLoader';
 
 const LoginPage = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const { token, error } = useAppSelector((state: RootState) => state.auth);
+	const { token, error, loading } = useAppSelector((state: RootState) => state.auth);
 	const { register, handleSubmit } = useForm<IAuth>();
 
 	const onlogin: SubmitHandler<IAuth> = (data) => {
 		dispatch(login(data));
-		console.log(error);
 	};
 
 	useEffect(() => {
@@ -58,7 +58,7 @@ const LoginPage = () => {
 							</div>
 							<div className='mt-8 mb-4'>
 								<Button className='h-14 w-56' type='submit'>
-									Login Now
+									{loading ? <BeatLoader color='white' /> : 'Login Now'}
 								</Button>
 							</div>
 							<div>
