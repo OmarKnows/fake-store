@@ -13,7 +13,7 @@ interface IProductCardProps {
 const ProductCard: React.FC<IProductCardProps> = ({ product, loading = false }) => {
 	return (
 		<CustomLink disabled={loading} to={'/products/' + product?._id}>
-			<Card className='h-[374px]'>
+			<Card className='h-[374px] hover:scale-105 transition duration-500'>
 				<CardContent className='flex justify-center'>
 					<div className='h-[264px] w-[264px] overflow-hidden '>
 						{loading ? (
