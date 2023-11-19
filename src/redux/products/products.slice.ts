@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ICategory, IProduct, Product } from './productsModel';
+import { ICategory, IProduct } from './productsModel';
 import productServices from './products.service';
 import { AxiosError } from 'axios';
 
@@ -31,34 +31,8 @@ export const getProducts = createAsyncThunk('getProducts', async (_, { rejectWit
 
 export const getProduct = createAsyncThunk('getProduct', async (id: string, { rejectWithValue }) => {
 	try {
-		return (await productServices.getProduct(id)).data;
-	} catch (error) {
-		const err = error as AxiosError;
-		return rejectWithValue(err.response?.data);
-	}
-});
-
-export const addProduct = createAsyncThunk('addProduct', async (product: Product, { rejectWithValue }) => {
-	try {
-		return (await productServices.addProduct(product)).data;
-	} catch (error) {
-		const err = error as AxiosError;
-		return rejectWithValue(err.response?.data);
-	}
-});
-
-export const updateProduct = createAsyncThunk('updateProduct', async (product: IProduct, { rejectWithValue }) => {
-	try {
-		return (await productServices.updateProduct(product)).data;
-	} catch (error) {
-		const err = error as AxiosError;
-		return rejectWithValue(err.response?.data);
-	}
-});
-
-export const deleteProduct = createAsyncThunk('deleteProduct', async (id: string, { rejectWithValue }) => {
-	try {
-		return (await productServices.deleteProduct(id)).data;
+		const { data } = await productServices.getProduct(id);
+		return data.data;
 	} catch (error) {
 		const err = error as AxiosError;
 		return rejectWithValue(err.response?.data);
@@ -117,39 +91,6 @@ const productsSlice = createSlice({
 				state.product = action.payload;
 			})
 			.addCase(getProduct.rejected, (state, action) => {
-				state.loading = false;
-				state.error = action.payload as string | null;
-			})
-			.addCase(addProduct.pending, (state) => {
-				state.loading = true;
-			})
-			.addCase(addProduct.fulfilled, (state, action) => {
-				state.loading = false;
-				state.product = action.payload;
-			})
-			.addCase(addProduct.rejected, (state, action) => {
-				state.loading = false;
-				state.error = action.payload as string | null;
-			})
-			.addCase(updateProduct.pending, (state) => {
-				state.loading = true;
-			})
-			.addCase(updateProduct.fulfilled, (state, action) => {
-				state.loading = false;
-				state.product = action.payload;
-			})
-			.addCase(updateProduct.rejected, (state, action) => {
-				state.loading = false;
-				state.error = action.payload as string | null;
-			})
-			.addCase(deleteProduct.pending, (state) => {
-				state.loading = true;
-			})
-			.addCase(deleteProduct.fulfilled, (state, action) => {
-				state.loading = false;
-				state.product = action.payload;
-			})
-			.addCase(deleteProduct.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.payload as string | null;
 			})

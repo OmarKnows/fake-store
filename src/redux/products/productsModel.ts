@@ -1,8 +1,3 @@
-export interface Rating {
-	count: number;
-	rate: number;
-}
-
 export interface IProduct {
 	sold: number;
 	images: string[];

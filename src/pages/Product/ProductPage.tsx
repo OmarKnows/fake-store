@@ -17,40 +17,34 @@ const ProductPage = () => {
 	const { id } = useParams();
 
 	const [quantity, setQuantity] = useState<number>(0);
-	const [selectedImg, setSelectedimg] = useState<number>(1);
+	const [selectedImg, setSelectedimg] = useState<string>('');
 
 	useEffect(() => {
 		id && dispatch(getProduct(id));
+		product?.images.map((image) => console.log(image));
 	}, []);
 
 	return (
 		<div>
 			{loading && <ProdutSkeleton />}
 			{!loading && !error ? (
-				<div className='flex justify-center mt-20 items-center'>
-					<div className='[&>*]:overflow-hidden [&>*]:w-[155px] [&>*]:h-[135px] flex flex-col justify-between h-full gap-[10px] me-[14px]'>
-						<div onClick={() => setSelectedimg(1)} className={cn('cursor-pointer', selectedImg === 1 ? 'border' : '')}>
-							<img className='w-full h-full object-contain' src={product?.image} />
-						</div>
-						<div onClick={() => setSelectedimg(2)} className={cn('cursor-pointer', selectedImg === 2 ? 'border' : '')}>
-							<img className='w-full h-full object-contain' src={product?.image} />
-						</div>
-						<div onClick={() => setSelectedimg(3)} className={cn('cursor-pointer', selectedImg === 3 ? 'border' : '')}>
-							<img className='w-full h-full object-contain' src={product?.image} />
-						</div>
-						<div onClick={() => setSelectedimg(4)} className={cn('cursor-pointer', selectedImg === 4 ? 'border' : '')}>
-							<img className='w-full h-full object-contain' src={product?.image} />
-						</div>
+				<div className='flex justify-center mt-20'>
+					<div className='flex flex-col justify-between h-full gap-[10px] me-[14px]'>
+						{product?.images.map((image, index) => (
+							<div className='w-[155px] h-[135px] overflow-hidden'>
+								<img className='w-full h-full object-contain' key={index} src={image} />
+							</div>
+						))}
 					</div>
 					<div className='w-[584px] h-[571px] border border-gray-300 me-10'>
-						<img className='w-full h-full object-contain' src={product?.image} />
+						<img className='w-full h-full object-contain' src={selectedImg} />
 					</div>
 					<div className='w-[494px]'>
 						<div className='font-semibold text-gray-900 mb-2'>{product?.title}</div>
 						<div className='font-semibold text-sm text-gray-600 mb-4'>{product?.description}</div>
 						<div className='flex items-center gap-32'>
-							<div className='font-semibold text-sm text-gray-600'>item #: {product?.id}</div>
-							<ProductRating value={product?.rating} />
+							<div className='font-semibold text-sm text-gray-600'>item #: {product?._id}</div>
+							<ProductRating value={product?.ratingsAverage} quantity={product?.ratingsQuantity} />
 						</div>
 						<div className='ms-3 my-6 text-xl font-medium'>${product?.price}</div>
 						<div className='text-green-600 text-sm font-bold'>Order now and get it around Tuesday, January 17</div>
