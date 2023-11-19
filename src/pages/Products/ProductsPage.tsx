@@ -8,8 +8,8 @@ import carousel1 from '@/assets/carousel1.avif';
 import carousel2 from '@/assets/carousel2.avif';
 import carousel3 from '@/assets/carousel3.avif';
 import { Link } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import ProductsSkeleton from './ProductsSkeleton';
 
 const ProductsPage = () => {
 	const dispatch = useAppDispatch();
@@ -29,21 +29,7 @@ const ProductsPage = () => {
 					<img className='h-full w-full object-cover' src={carousel3} key={3} />,
 				]}
 			/>
-			{loading && (
-				<div className='my-5'>
-					<div className='flex justify-between px-24 mb-1'>
-						<Skeleton className='w-40' enableAnimation />
-						<Skeleton className='w-20' enableAnimation />
-					</div>
-					<hr className='mx-9' />
-					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-10 mx-24'>
-						<ProductCard loading={true} />
-						<ProductCard loading={true} />
-						<ProductCard loading={true} />
-						<ProductCard loading={true} />
-					</div>
-				</div>
-			)}
+			{loading && <ProductsSkeleton />}
 			{error && <p>Error: {error}</p>}
 			{!loading && !error ? (
 				<div>
