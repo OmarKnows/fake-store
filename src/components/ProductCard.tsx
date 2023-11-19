@@ -12,14 +12,14 @@ interface IProductCardProps {
 
 const ProductCard: React.FC<IProductCardProps> = ({ product, loading = false }) => {
 	return (
-		<Link to={loading ? '/products' : `${product?.id}`}>
+		<Link to={loading ? '/products' : `${product?._id}`}>
 			<Card className='h-[374px]'>
 				<CardContent className='flex justify-center'>
 					<div className='h-[264px] w-[264px] overflow-hidden '>
 						{loading ? (
 							<Skeleton enableAnimation className='h-full w-full' />
 						) : (
-							<img className='h-full w-full object-cover' src={product?.image} />
+							<img className='h-full w-full object-cover' src={product?.images[0]} />
 						)}
 					</div>
 				</CardContent>

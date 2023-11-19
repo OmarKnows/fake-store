@@ -4,13 +4,46 @@ export interface Rating {
 }
 
 export interface IProduct {
-	id: number;
+	sold: number;
+	images: string[];
+	subcategory: Subcategory[];
+	ratingsQuantity: number;
+	_id: string;
 	title: string;
-	price: number;
+	slug: string;
 	description: string;
+	quantity: number;
+	price: number;
+	imageCover: string;
+	category: ICategory;
+	brand: Brand;
+	ratingsAverage: number;
+	createdAt: Date;
+	updatedAt: Date;
+	reviews: [];
+}
+
+export interface ICategory {
+	_id: string;
+	name: string;
+	slug: string;
 	image: string;
+	createdAt?: Date;
+	updatedAt?: Date;
+}
+
+export interface Subcategory {
+	_id: string;
+	name: string;
+	slug: string;
 	category: string;
-	rating: Rating;
+}
+
+export interface Brand {
+	_id: string;
+	name: string;
+	slug: string;
+	image: string;
 }
 
 export type Product = Omit<IProduct, 'id, rating'>;

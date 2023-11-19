@@ -25,7 +25,7 @@ const NavBar = () => {
 		<div className='flex justify-between items-center bg-dark h-[85px] px-6 text-white'>
 			<div className=' text-2xl font-normal'>Fake Store</div>
 			<div className='flex items-center gap-10'>
-				<NavLink className={({ isActive }) => (isActive ? 'text-active font-black' : 'font-black')} to='/products'>
+				<NavLink className={({ isActive }) => (isActive ? 'text-active font-black' : 'font-black')} to='/categories'>
 					Shop
 				</NavLink>
 				<NavLink className={({ isActive }) => (isActive ? 'text-active font-black' : 'font-black')} to='/contact-us'>

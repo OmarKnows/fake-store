@@ -27,7 +27,7 @@ const LoginPage = () => {
 	};
 
 	useEffect(() => {
-		if (token) navigate('/products');
+		if (token) navigate('/categories');
 	}, [navigate, token]);
 
 	return (

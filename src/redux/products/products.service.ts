@@ -3,7 +3,7 @@ import { IProduct, Product } from './productsModel';
 import api from '@/utils/api';
 
 const getProducts = async (): Promise<AxiosResponse> => {
-	return await api.get('products');
+	return await api.get('/products');
 };
 
 const getProduct = async (id: string) => {
@@ -17,7 +17,7 @@ const addProduct = async (product: Product) => {
 };
 
 const updateProduct = async (product: IProduct) => {
-	return await api.put(`products/${product.id}`, {
+	return await api.put(`products/${product._id}`, {
 		...product,
 	});
 };
@@ -27,7 +27,11 @@ const deleteProduct = async (id: string) => {
 };
 
 const getCategories = async () => {
-	return await api.get('products/categories');
+	return await api.get('/categories');
+};
+
+const getProductsInCategory = async (category: string) => {
+	return await api.get(`/products?category[in]=${category}`);
 };
 
 const productServices = {
@@ -37,5 +41,6 @@ const productServices = {
 	updateProduct,
 	deleteProduct,
 	getCategories,
+	getProductsInCategory,
 };
 export default productServices;
