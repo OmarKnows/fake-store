@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import login_Splash from '../assets/login_splash.png';
-import email from '../assets/email.png';
-import password from '../assets/password.png';
-import google from '../assets/google.png';
-import facebook from '../assets/facebook.png';
-import twitter from '../assets/twitter.png';
+import login_Splash from '@/assets/login_splash.png';
+import email from '@/assets/email.png';
+import password from '@/assets/password.png';
+import google from '@/assets/google.png';
+import facebook from '@/assets/facebook.png';
+import twitter from '@/assets/twitter.png';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -41,7 +41,7 @@ const LoginPage = () => {
 							To keep connected with us please login with your personal information by email and password
 						</div>
 						<form className='mt-20' onSubmit={handleSubmit(onlogin)}>
-							<Input type='text' placeholder='Username' img={email} {...register('username')} />
+							<Input type='text' placeholder='Email' img={email} {...register('email')} />
 							<Input
 								type='password'
 								placeholder='Password'

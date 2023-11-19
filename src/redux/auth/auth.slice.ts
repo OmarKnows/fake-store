@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import authServices from './auth.service';
 import { IAuth } from './authModel';
+import { IApiResponse } from '@/utils/api';
 
 interface IAuthState {
 	token: string | null;
@@ -22,7 +23,7 @@ export const login = createAsyncThunk('login', async (credentials: IAuth, { reje
 		return response.data.token;
 	} catch (error) {
 		const err = error as AxiosError;
-		return rejectWithValue(err.response?.data);
+		return rejectWithValue((err.response?.data as IApiResponse).message);
 	}
 });
 
