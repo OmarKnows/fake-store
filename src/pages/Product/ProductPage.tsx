@@ -17,11 +17,10 @@ const ProductPage = () => {
 	const { id } = useParams();
 
 	const [quantity, setQuantity] = useState<number>(0);
-	const [selectedImg, setSelectedimg] = useState<string>('');
+	const [selectedImg, setSelectedImg] = useState<string | undefined>(undefined);
 
 	useEffect(() => {
 		id && dispatch(getProduct(id));
-		product?.images.map((image) => console.log(image));
 	}, []);
 
 	return (
@@ -29,15 +28,25 @@ const ProductPage = () => {
 			{loading && <ProdutSkeleton />}
 			{!loading && !error ? (
 				<div className='flex justify-center mt-20'>
-					<div className='flex flex-col justify-between h-full gap-[10px] me-[14px]'>
+					<div className='flex flex-col justify-between gap-[10px] me-[14px] max-h-[571px] overflow-y-auto overflow-x-hidden p-2'>
 						{product?.images.map((image, index) => (
-							<div className='w-[155px] h-[135px] overflow-hidden'>
-								<img className='w-full h-full object-contain' key={index} src={image} />
+							<div
+								key={index}
+								className={cn('w-[155px] h-[135px] cursor-pointer hover:scale-105 transition duration-500', {
+									border: selectedImg === product.images[index],
+								})}
+							>
+								<img
+									className='w-full h-full object-contain'
+									src={image}
+									onClick={() => setSelectedImg(image)}
+									onKeyDown={() => setSelectedImg(image)}
+								/>
 							</div>
 						))}
 					</div>
 					<div className='w-[584px] h-[571px] border border-gray-300 me-10'>
-						<img className='w-full h-full object-contain' src={selectedImg} />
+						<img className='w-full h-full object-contain' src={selectedImg ?? product?.images[0]} />
 					</div>
 					<div className='w-[494px]'>
 						<div className='font-semibold text-gray-900 mb-2'>{product?.title}</div>
