@@ -5,18 +5,21 @@ import { RootState } from '@/redux/store';
 import { useEffect, useState } from 'react';
 import ProductRating from '@/components/ProductRating';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+// import { Input } from '@/components/ui/input';
 import { GoCheck } from 'react-icons/go';
 import { cn } from '@/lib/utils';
 import 'react-loading-skeleton/dist/skeleton.css';
 import ProdutSkeleton from './ProdutSkeleton';
+import { addToCart } from '@/redux/cart/cart.slice';
+import BeatLoader from 'react-spinners/BeatLoader';
 
 const ProductPage = () => {
 	const dispatch = useAppDispatch();
 	const { product, loading, error } = useAppSelector((state: RootState) => state.products);
+	const { loading: cartLoading } = useAppSelector((state) => state.cart);
 	const { id } = useParams();
 
-	const [quantity, setQuantity] = useState<number>(0);
+	// const [quantity, setQuantity] = useState<number>(0);
 	const [selectedImg, setSelectedImg] = useState<string | undefined>(undefined);
 
 	useEffect(() => {
@@ -65,14 +68,19 @@ const ProductPage = () => {
 							</div>
 						</div>
 						<div className='flex items-center mb-6 gap-11'>
-							<Input
+							{/* <Input
 								className='w-[168px] h-[47px]'
 								type='number'
 								min={0}
 								value={quantity}
 								onChange={(e) => setQuantity(+e.target.value)}
-							/>
-							<Button className='w-[168px] h-[47px] rounded-lg font-bold'>Add to Cart</Button>
+							/> */}
+							<Button
+								onClick={() => product && dispatch(addToCart(product._id))}
+								className='w-[168px] h-[47px] rounded-lg font-bold'
+							>
+								{cartLoading ? <BeatLoader color='white' /> : 'Add to Cart'}
+							</Button>
 						</div>
 						<hr />
 					</div>

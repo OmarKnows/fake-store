@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import authServices from './auth.service';
 import { IAuth } from './authModel';
-import { IApiResponse } from '@/utils/api';
+import { IApiResponse, getToken } from '@/utils/api';
 
 interface IAuthState {
 	token: string | null;
@@ -11,7 +11,7 @@ interface IAuthState {
 }
 
 const initialState: IAuthState = {
-	token: localStorage.getItem('token') || null,
+	token: getToken(),
 	loading: false,
 	error: null,
 };

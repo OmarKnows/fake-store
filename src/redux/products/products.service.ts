@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import api from '@/utils/api';
+import { api } from '@/utils/api';
 
 const getProducts = async (): Promise<AxiosResponse> => {
 	return await api.get('/products');

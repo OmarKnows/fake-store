@@ -5,6 +5,7 @@ import LoginPage from '@/pages/Login/LoginPage';
 import ProductPage from '@/pages/Product/ProductPage';
 import CategoriesPage from '@/pages/Categories/CategoriesPage';
 import ProductsPage from '@/pages/Products/ProductsPage';
+import CartPage from '@/pages/Cart/CartPage';
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -22,6 +23,7 @@ export const router = createBrowserRouter(
 			<Route path='/categories' element={<CategoriesPage />} />
 			<Route path='/categories/:id' element={<ProductsPage />} />
 			<Route path='/products/:id' element={<ProductPage />} />
+			<Route path='/cart' element={<CartPage />} />
 		</Route>
 	)
 );

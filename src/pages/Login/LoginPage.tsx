@@ -27,7 +27,11 @@ const LoginPage = () => {
 	};
 
 	useEffect(() => {
-		if (token) navigate('/categories');
+		if (token) {
+			console.log('logged in');
+
+			navigate('/categories');
+		}
 	}, [navigate, token]);
 
 	return (

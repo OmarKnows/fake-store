@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import api from '@/utils/api';
+import { api } from '@/utils/api';
 import { IAuth } from './authModel';
 
 const login = async (credentials: IAuth): Promise<AxiosResponse> => {

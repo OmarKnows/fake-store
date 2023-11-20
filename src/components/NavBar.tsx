@@ -4,14 +4,15 @@ import cart from '../assets/cart.png';
 import profile from '../assets/profile.png';
 import LngDropdown from './LngDropdown';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { RootState } from '@/redux/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { logout } from '@/redux/auth/auth.slice';
 
 const NavBar = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const { token } = useAppSelector((state: RootState) => state.auth);
+	const [count, setCount] = useState<number>(0);
+	const { token } = useAppSelector((state) => state.auth);
+	const { products } = useAppSelector((state) => state.cart);
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -19,11 +20,21 @@ const NavBar = () => {
 
 	useEffect(() => {
 		if (!token) navigate('/');
-	}, [navigate, token]);
+		const cartCount = () => {
+			let counter = 0;
+			products.forEach((product) => {
+				counter += product.count;
+			});
+			setCount(counter);
+		};
+		cartCount();
+	}, [navigate, token, products]);
 
 	return (
 		<div className='flex justify-between items-center bg-dark h-[85px] px-6 text-white'>
-			<div className=' text-2xl font-normal'>Fake Store</div>
+			<NavLink to={'/categories'} className=' text-2xl font-normal'>
+				Fake Store
+			</NavLink>
 			<div className='flex items-center gap-10'>
 				<NavLink className={({ isActive }) => (isActive ? 'text-active font-black' : 'font-black')} to='/categories'>
 					Shop
@@ -41,7 +52,12 @@ const NavBar = () => {
 
 				<div className='flex items-center gap-6'>
 					{token ? <img src={profile} /> : <></>}
-					<img src={cart} />
+					<NavLink className='relative' to='cart'>
+						<img src={cart} />
+						<div className='absolute right-[-10px] top-[-10px] bg-red-400 rounded-full w-4 h-4 text-xs flex justify-center items-center p-1	'>
+							{count}
+						</div>
+					</NavLink>
 					<LngDropdown />
 					{token ? (
 						<Button className='w-36 h-10' variant='secondary' onClick={handleLogout}>
