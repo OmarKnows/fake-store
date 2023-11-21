@@ -10,7 +10,7 @@ const CartPage = () => {
 
 	useEffect(() => {
 		dispatch(getCart());
-	}, [dispatch]);
+	}, [dispatch,products]);
 
 	return (
 		<div className='flex justify-center gap-5'>

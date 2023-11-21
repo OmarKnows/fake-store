@@ -138,11 +138,9 @@ const cartSlice = createSlice({
 				state.loading = true;
 				state.error = null;
 			})
-			.addCase(clearCart.fulfilled, (state, action) => {
+			.addCase(clearCart.fulfilled, (state) => {
 				state.loading = false;
-				state.products = action.payload.products;
-				state.cartOwner = action.payload.cartOwner;
-				state.totalCartPrice = action.payload.totalCartPrice;
+				state.products = [];
 				state.error = null;
 			})
 			.addCase(clearCart.rejected, (state, action) => {
