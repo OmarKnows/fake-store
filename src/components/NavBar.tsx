@@ -19,7 +19,7 @@ const NavBar = () => {
 	};
 
 	useEffect(() => {
-		if (!token) navigate('/');
+		// if (!token) navigate('/');
 		const cartCount = () => {
 			let counter = 0;
 			products.forEach((product) => {
@@ -52,12 +52,16 @@ const NavBar = () => {
 
 				<div className='flex items-center gap-6'>
 					{token ? <img src={profile} /> : <></>}
-					{token ? <NavLink className='relative' to='cart'>
+					<NavLink className='relative' to='cart'>
 						<img src={cart} />
-						{count? <div className='absolute right-[-10px] top-[-10px] bg-red-400 rounded-full w-4 h-4 text-xs flex justify-center items-center p-1	'>
-							{count}
-						</div> : <></>}
-					</NavLink> : <></>}
+						{count ? (
+							<div className='absolute right-[-10px] top-[-10px] bg-red-400 rounded-full w-4 h-4 text-xs flex justify-center items-center p-1	'>
+								{count}
+							</div>
+						) : (
+							<></>
+						)}
+					</NavLink>
 					<LngDropdown />
 					{token ? (
 						<Button className='w-36 h-10' variant='secondary' onClick={handleLogout}>

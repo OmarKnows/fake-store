@@ -84,7 +84,18 @@ export const clearCart = createAsyncThunk('clearCart', async (_, { rejectWithVal
 const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
-	reducers: {},
+	reducers: {
+		addToAnonymousCart: (_, action) => {
+			const product = action.payload;
+			cartServices.addToAnonymousCart(product);
+		},
+		getAnonymousCart: (state) => {
+			state.products = cartServices.getAnonymousCart();
+		},
+		combineCarts: () => {
+			cartServices.combineCarts();
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getCart.pending, (state) => {
@@ -162,4 +173,5 @@ const cartSlice = createSlice({
 	},
 });
 
+export const { addToAnonymousCart, getAnonymousCart, combineCarts } = cartSlice.actions;
 export default cartSlice.reducer;

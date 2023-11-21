@@ -17,6 +17,7 @@ import { RootState } from '@/redux/store';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { combineCarts } from '@/redux/cart/cart.slice';
 
 const LoginPage = () => {
 	const navigate = useNavigate();
@@ -24,8 +25,9 @@ const LoginPage = () => {
 	const { token, error, loading } = useAppSelector((state: RootState) => state.auth);
 	const { register, handleSubmit } = useForm<IAuth>();
 
-	const onlogin: SubmitHandler<IAuth> = (data) => {
-		dispatch(login(data));
+	const onlogin: SubmitHandler<IAuth> = async (data) => {
+		await dispatch(login(data));
+		if (!error) dispatch(combineCarts());
 	};
 
 	useEffect(() => {

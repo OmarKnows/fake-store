@@ -11,8 +11,17 @@ const api = axios.create({
 
 const apiPrivate = axios.create({
 	baseURL: BASE_URL,
-	headers: { token: getToken() },
 });
+
+apiPrivate.interceptors.request.use(
+	(config) => {
+		if (!config.headers['token']) {
+			config.headers['token'] = `${getToken()}`;
+		}
+		return config;
+	},
+	(error) => Promise.reject(error)
+);
 
 export interface IApiResponse {
 	message: string;

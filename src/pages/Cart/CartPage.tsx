@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { clearCart, getCart, removeFromCart } from '@/redux/cart/cart.slice';
+import { clearCart, getAnonymousCart, getCart, removeFromCart } from '@/redux/cart/cart.slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { useEffect } from 'react';
 import { IoMdClose } from 'react-icons/io';
@@ -9,11 +9,14 @@ import 'react-toastify/dist/ReactToastify.css';
 const CartPage = () => {
 	const dispatch = useAppDispatch();
 	const { products, totalCartPrice, error } = useAppSelector((state) => state.cart);
+	const { token } = useAppSelector((state) => state.auth);
 
 	useEffect(() => {
-		dispatch(getCart());
-		if (error) toast.error(error);
-	}, [error]);
+		if (token) {
+			dispatch(getCart());
+			if (error) toast.error(error);
+		} else dispatch(getAnonymousCart());
+	}, [error, token]);
 
 	return (
 		<div className='flex justify-center gap-5'>
@@ -28,7 +31,7 @@ const CartPage = () => {
 				</div>
 				<hr />
 				<div>
-					{products.length ? (
+					{products?.length ? (
 						products?.map((product) => (
 							<div key={product._id}>
 								<div className='flex p-5 gap-5 justify-between'>

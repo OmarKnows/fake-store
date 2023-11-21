@@ -10,23 +10,30 @@ import { GoCheck } from 'react-icons/go';
 import { cn } from '@/lib/utils';
 import 'react-loading-skeleton/dist/skeleton.css';
 import ProdutSkeleton from './ProdutSkeleton';
-import { addToCart } from '@/redux/cart/cart.slice';
+import { addToCart, addToAnonymousCart } from '@/redux/cart/cart.slice';
 import BeatLoader from 'react-spinners/BeatLoader';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { IProduct } from '@/redux/products/productsModel';
 
 const ProductPage = () => {
 	const dispatch = useAppDispatch();
 	const { product, loading, error } = useAppSelector((state: RootState) => state.products);
 	const { loading: cartLoading, error: cartError } = useAppSelector((state) => state.cart);
+	const { token } = useAppSelector((state) => state.auth);
 	const { id } = useParams();
 
 	// const [quantity, setQuantity] = useState<number>(0);
 	const [selectedImg, setSelectedImg] = useState<string | undefined>(undefined);
 
-	const handleAddToCart = async (id: string) => {
-		await dispatch(addToCart(id));
-		if (!cartError) toast.success('Item Added To Cart');
+	const handleAddToCart = async (product: IProduct) => {
+		if (token) {
+			await dispatch(addToCart(product._id));
+			if (!cartError) toast.success('Item Added To Cart');
+		} else {
+			dispatch(addToAnonymousCart(product));
+			toast.success('Item Added To Cart');
+		}
 	};
 
 	useEffect(() => {
@@ -85,7 +92,7 @@ const ProductPage = () => {
 								onChange={(e) => setQuantity(+e.target.value)}
 							/> */}
 							<Button
-								onClick={() => product && handleAddToCart(product._id)}
+								onClick={() => product && handleAddToCart(product)}
 								className='w-[168px] h-[47px] rounded-lg font-bold'
 							>
 								{cartLoading ? <BeatLoader color='white' /> : 'Add to Cart'}
