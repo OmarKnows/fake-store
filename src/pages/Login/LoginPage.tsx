@@ -15,6 +15,8 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '@/redux/store';
 import BeatLoader from 'react-spinners/BeatLoader';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
 	const navigate = useNavigate();
@@ -28,15 +30,14 @@ const LoginPage = () => {
 
 	useEffect(() => {
 		if (token) {
-			console.log('logged in');
-
 			navigate('/categories');
 		}
-	}, [navigate, token]);
+		if (error) toast.error(error);
+	}, [navigate, token, error]);
 
 	return (
 		<div>
-			{error && <p>Error: {error}</p>}
+			<ToastContainer />
 			<div className='flex'>
 				<div className='w-1/2 flex justify-center text-center '>
 					<div>

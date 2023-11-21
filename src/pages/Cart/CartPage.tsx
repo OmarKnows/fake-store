@@ -3,17 +3,21 @@ import { clearCart, getCart, removeFromCart } from '@/redux/cart/cart.slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { useEffect } from 'react';
 import { IoMdClose } from 'react-icons/io';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CartPage = () => {
 	const dispatch = useAppDispatch();
-	const { products, totalCartPrice } = useAppSelector((state) => state.cart);
+	const { products, totalCartPrice, error } = useAppSelector((state) => state.cart);
 
 	useEffect(() => {
 		dispatch(getCart());
-	}, [dispatch,products]);
+		if (error) toast.error(error);
+	}, [error]);
 
 	return (
 		<div className='flex justify-center gap-5'>
+			<ToastContainer />
 			<div className=' p-5 rounded-lg shadow-md mt-10'>
 				<div className='flex justify-between items-center'>
 					<div className='text-2xl font-bold my-3'>My Cart</div>

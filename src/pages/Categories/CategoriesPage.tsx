@@ -9,6 +9,8 @@ import carousel3 from '@/assets/carousel3.avif';
 import 'react-loading-skeleton/dist/skeleton.css';
 import ProductsSkeleton from './CategoriesSkeleton';
 import CategoryCard from '@/components/ui/CategoryCard';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CategoriesPage = () => {
 	const dispatch = useAppDispatch();
@@ -16,10 +18,12 @@ const CategoriesPage = () => {
 
 	useEffect(() => {
 		dispatch(getCategories());
-	}, [dispatch]);
+		if (error) toast.error(error);
+	}, [dispatch, error]);
 
 	return (
 		<div>
+			<ToastContainer />
 			<Carousel
 				items={[
 					<img className='h-full w-full object-cover' src={carousel1} key={1} />,
@@ -28,7 +32,6 @@ const CategoriesPage = () => {
 				]}
 			/>
 			{loading && <ProductsSkeleton />}
-			{error && <p>Error: {error}</p>}
 			{!loading && !error ? (
 				<div className='flex justify-center gap-5 flex-wrap mt-20'>
 					{categories.map((category) => (

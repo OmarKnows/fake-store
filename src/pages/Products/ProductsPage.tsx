@@ -4,6 +4,8 @@ import { getProductsInCategory } from '@/redux/products/products.slice';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductsSkeleton from './ProductsSkeleton';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductsPage = () => {
 	const { id } = useParams();
@@ -12,10 +14,12 @@ const ProductsPage = () => {
 
 	useEffect(() => {
 		id && dispatch(getProductsInCategory(id));
-	}, [dispatch]);
+		if (error) toast.error(error);
+	}, [dispatch, error]);
 
 	return (
 		<div>
+			<ToastContainer />
 			{error && <p>Error: {error}</p>}
 			{loading ? <ProductsSkeleton /> : <></>}
 			{!loading && !error && !products.length ? (

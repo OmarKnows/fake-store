@@ -54,9 +54,9 @@ const NavBar = () => {
 					{token ? <img src={profile} /> : <></>}
 					{token ? <NavLink className='relative' to='cart'>
 						<img src={cart} />
-						<div className='absolute right-[-10px] top-[-10px] bg-red-400 rounded-full w-4 h-4 text-xs flex justify-center items-center p-1	'>
+						{count? <div className='absolute right-[-10px] top-[-10px] bg-red-400 rounded-full w-4 h-4 text-xs flex justify-center items-center p-1	'>
 							{count}
-						</div>
+						</div> : <></>}
 					</NavLink> : <></>}
 					<LngDropdown />
 					{token ? (

@@ -12,22 +12,31 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import ProdutSkeleton from './ProdutSkeleton';
 import { addToCart } from '@/redux/cart/cart.slice';
 import BeatLoader from 'react-spinners/BeatLoader';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const ProductPage = () => {
 	const dispatch = useAppDispatch();
 	const { product, loading, error } = useAppSelector((state: RootState) => state.products);
-	const { loading: cartLoading } = useAppSelector((state) => state.cart);
+	const { loading: cartLoading, error: cartError } = useAppSelector((state) => state.cart);
 	const { id } = useParams();
 
 	// const [quantity, setQuantity] = useState<number>(0);
 	const [selectedImg, setSelectedImg] = useState<string | undefined>(undefined);
 
+	const handleAddToCart = async (id: string) => {
+		await dispatch(addToCart(id));
+		if (!cartError) toast.success('Item Added To Cart');
+	};
+
 	useEffect(() => {
 		id && dispatch(getProduct(id));
-	}, []);
+		if (error) toast.error(error);
+	}, [error]);
 
 	return (
 		<div>
+			<ToastContainer />
 			{loading && <ProdutSkeleton />}
 			{!loading && !error ? (
 				<div className='flex justify-center mt-20'>
@@ -76,7 +85,7 @@ const ProductPage = () => {
 								onChange={(e) => setQuantity(+e.target.value)}
 							/> */}
 							<Button
-								onClick={() => product && dispatch(addToCart(product._id))}
+								onClick={() => product && handleAddToCart(product._id)}
 								className='w-[168px] h-[47px] rounded-lg font-bold'
 							>
 								{cartLoading ? <BeatLoader color='white' /> : 'Add to Cart'}
