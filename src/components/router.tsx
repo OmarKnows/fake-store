@@ -12,7 +12,7 @@ export const router = createBrowserRouter(
 		<Route
 			path='/'
 			element={
-				<div className='relative min-h-screen'>
+				<div className='flex flex-col'>
 					<NavBar />
 					<Outlet />
 					<Footer />
