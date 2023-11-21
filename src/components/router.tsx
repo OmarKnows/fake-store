@@ -12,11 +12,11 @@ export const router = createBrowserRouter(
 		<Route
 			path='/'
 			element={
-				<>
+				<div className='relative min-h-screen'>
 					<NavBar />
 					<Outlet />
 					<Footer />
-				</>
+				</div>
 			}
 		>
 			<Route index path='/' element={<LoginPage />} />
