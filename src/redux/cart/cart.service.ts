@@ -17,13 +17,13 @@ const addToCart = async (productId: string): Promise<AxiosResponse> => {
 	});
 };
 
-const combineCarts = () => {
+const combineCarts = async () => {
 	let cartArray: ICartItem[] = JSON.parse(localStorage.getItem('cart') || '[]');
 
-	cartArray.forEach((product) => {
-		addToCart(product._id);
-		updateCartProductQuantity(product._id, product.count);
-	});
+	for (const product of cartArray) {
+		await addToCart(product._id);
+		await updateCartProductQuantity(product._id, product.count);
+	}
 
 	localStorage.removeItem('cart');
 };
@@ -46,6 +46,7 @@ const addToAnonymousCart = (product: IProduct) => {
 	}
 
 	localStorage.setItem('cart', JSON.stringify(cartArray));
+	return cartArray;
 };
 
 const updateCartProductQuantity = async (productId: string, count: number): Promise<AxiosResponse> => {
@@ -56,6 +57,13 @@ const updateCartProductQuantity = async (productId: string, count: number): Prom
 
 const removeFromCart = async (productId: string): Promise<AxiosResponse> => {
 	return await apiPrivate.delete(`/cart/${productId}`);
+};
+
+const removeFromAnonymousCart = (productId: string): ICartItem[] => {
+	let cartArray: ICartItem[] = JSON.parse(localStorage.getItem('cart') || '[]');
+	cartArray = cartArray.filter((item) => item._id !== productId);
+	localStorage.setItem('cart', JSON.stringify(cartArray));
+	return cartArray;
 };
 
 const clearCart = async (): Promise<AxiosResponse> => {
@@ -71,5 +79,7 @@ const cartServices = {
 	addToAnonymousCart,
 	getAnonymousCart,
 	combineCarts,
+	removeFromAnonymousCart,
 };
+
 export default cartServices;

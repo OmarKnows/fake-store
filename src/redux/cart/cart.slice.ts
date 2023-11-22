@@ -81,19 +81,34 @@ export const clearCart = createAsyncThunk('clearCart', async (_, { rejectWithVal
 	}
 });
 
+export const combineCarts = createAsyncThunk('combineCarts', async (_, { rejectWithValue }) => {
+	try {
+		cartServices.combineCarts();
+	} catch (error) {
+		const err = error as AxiosError;
+		return rejectWithValue(err.response?.data);
+	}
+});
+
 const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		addToAnonymousCart: (_, action) => {
-			const product = action.payload;
-			cartServices.addToAnonymousCart(product);
+		addToAnonymousCart: (state, action) => {
+			state.products = cartServices.addToAnonymousCart(action.payload);
+			state.totalCartPrice += action.payload.price;
 		},
 		getAnonymousCart: (state) => {
 			state.products = cartServices.getAnonymousCart();
 		},
-		combineCarts: () => {
-			cartServices.combineCarts();
+		removeFromAnonymousCart: (state, action) => {
+			state.products = cartServices.removeFromAnonymousCart(action.payload._id);
+			state.totalCartPrice -= action.payload.price;
+		},
+		clearAnonymousCart: (state) => {
+			localStorage.removeItem('cart');
+			state.products = [];
+			state.totalCartPrice = 0;
 		},
 	},
 	extraReducers: (builder) => {
@@ -173,5 +188,5 @@ const cartSlice = createSlice({
 	},
 });
 
-export const { addToAnonymousCart, getAnonymousCart, combineCarts } = cartSlice.actions;
+export const { addToAnonymousCart, getAnonymousCart, removeFromAnonymousCart, clearAnonymousCart } = cartSlice.actions;
 export default cartSlice.reducer;

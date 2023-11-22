@@ -12,14 +12,15 @@ const NavBar = () => {
 	const dispatch = useAppDispatch();
 	const [count, setCount] = useState<number>(0);
 	const { token } = useAppSelector((state) => state.auth);
-	const { products } = useAppSelector((state) => state.cart);
+	const { products, product } = useAppSelector((state) => state.cart);
 
 	const handleLogout = () => {
 		dispatch(logout());
+		navigate('/');
+		setCount(0);
 	};
 
 	useEffect(() => {
-		// if (!token) navigate('/');
 		const cartCount = () => {
 			let counter = 0;
 			products.forEach((product) => {
@@ -28,7 +29,7 @@ const NavBar = () => {
 			setCount(counter);
 		};
 		cartCount();
-	}, [navigate, token, products]);
+	}, [navigate, token, products, product]);
 
 	return (
 		<div className='flex justify-between items-center bg-dark h-[85px] px-6 text-white'>

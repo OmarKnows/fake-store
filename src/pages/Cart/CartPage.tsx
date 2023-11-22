@@ -1,5 +1,13 @@
 import { Button } from '@/components/ui/button';
-import { clearCart, getAnonymousCart, getCart, removeFromCart } from '@/redux/cart/cart.slice';
+import {
+	clearAnonymousCart,
+	clearCart,
+	getAnonymousCart,
+	getCart,
+	removeFromAnonymousCart,
+	removeFromCart,
+} from '@/redux/cart/cart.slice';
+import { ICartItem } from '@/redux/cart/cartModel';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { useEffect } from 'react';
 import { IoMdClose } from 'react-icons/io';
@@ -10,6 +18,14 @@ const CartPage = () => {
 	const dispatch = useAppDispatch();
 	const { products, totalCartPrice, error } = useAppSelector((state) => state.cart);
 	const { token } = useAppSelector((state) => state.auth);
+
+	const handleClearCart = () => {
+		token ? dispatch(clearCart()) : dispatch(clearAnonymousCart());
+	};
+
+	const handleRemoveItem = (product: ICartItem) => {
+		token ? dispatch(removeFromCart(product._id)) : dispatch(removeFromAnonymousCart(product));
+	};
 
 	useEffect(() => {
 		if (token) {
@@ -25,7 +41,7 @@ const CartPage = () => {
 				<div className='flex justify-between items-center'>
 					<div className='text-2xl font-bold my-3'>My Cart</div>
 
-					<Button variant='ghost' className='ml-auto' onClick={() => dispatch(clearCart())}>
+					<Button variant='ghost' className='ml-auto' onClick={handleClearCart}>
 						<IoMdClose size='2rem' />
 					</Button>
 				</div>
@@ -43,11 +59,7 @@ const CartPage = () => {
 										<div>{product.product.title}</div>
 										<div>Quantity: {product.count}</div>
 									</div>
-									<Button
-										variant='ghost'
-										className='ml-auto'
-										onClick={() => dispatch(removeFromCart(product.product._id))}
-									>
+									<Button variant='ghost' className='ml-auto' onClick={() => handleRemoveItem(product)}>
 										<IoMdClose size='2rem' />
 									</Button>
 								</div>
