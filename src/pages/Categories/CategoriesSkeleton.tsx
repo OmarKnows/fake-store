@@ -1,4 +1,4 @@
-import CategoryCard from '@/components/ui/CategoryCard';
+import CategoryCard from '@/components/CategoryCard';
 
 const CategoriesSkeleton = () => {
 	return (

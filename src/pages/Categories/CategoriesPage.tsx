@@ -8,9 +8,9 @@ import carousel2 from '@/assets/carousel2.avif';
 import carousel3 from '@/assets/carousel3.avif';
 import 'react-loading-skeleton/dist/skeleton.css';
 import ProductsSkeleton from './CategoriesSkeleton';
-import CategoryCard from '@/components/ui/CategoryCard';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CategoryCard from '@/components/CategoryCard';
 
 const CategoriesPage = () => {
 	const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardHeader } from './card';
+import { Card, CardContent, CardHeader } from './ui/card';
 import Skeleton from 'react-loading-skeleton';
 import { ICategory } from '@/redux/products/productsModel';
 import CustomLink from './CustomLink';

@@ -5,7 +5,6 @@ import { RootState } from '@/redux/store';
 import { useEffect, useState } from 'react';
 import ProductRating from '@/components/ProductRating';
 import { Button } from '@/components/ui/button';
-// import { Input } from '@/components/ui/input';
 import { GoCheck } from 'react-icons/go';
 import { cn } from '@/lib/utils';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -23,7 +22,6 @@ const ProductPage = () => {
 	const { token } = useAppSelector((state) => state.auth);
 	const { id } = useParams();
 
-	// const [quantity, setQuantity] = useState<number>(0);
 	const [selectedImg, setSelectedImg] = useState<string | undefined>(undefined);
 
 	const handleAddToCart = async (product: IProduct) => {
@@ -84,13 +82,6 @@ const ProductPage = () => {
 							</div>
 						</div>
 						<div className='flex items-center mb-6 gap-11'>
-							{/* <Input
-								className='w-[168px] h-[47px]'
-								type='number'
-								min={0}
-								value={quantity}
-								onChange={(e) => setQuantity(+e.target.value)}
-							/> */}
 							<Button
 								onClick={() => product && handleAddToCart(product)}
 								className='w-[168px] h-[47px] rounded-lg font-bold'

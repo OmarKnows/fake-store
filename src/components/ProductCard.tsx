@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/co
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import CustomLink from './ui/CustomLink';
+import CustomLink from './CustomLink';
 
 interface IProductCardProps {
 	product?: IProduct;
