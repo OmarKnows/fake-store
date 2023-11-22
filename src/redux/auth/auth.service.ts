@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { api } from '@/utils/api';
-import { IAuth } from './authModel';
+import { IAuth, IRegister } from './authModel';
 
 const login = async (credentials: IAuth): Promise<AxiosResponse> => {
 	return await api.post('/auth/signin', {
@@ -8,7 +8,14 @@ const login = async (credentials: IAuth): Promise<AxiosResponse> => {
 	});
 };
 
+const signup = async (credentials: IRegister): Promise<AxiosResponse> => {
+	return await api.post('/auth/signup', {
+		...credentials,
+	});
+};
+
 const authServices = {
 	login,
+	signup,
 };
 export default authServices;

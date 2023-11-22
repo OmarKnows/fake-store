@@ -69,7 +69,7 @@ const LoginPage = () => {
 								</Button>
 							</div>
 							<div>
-								<Button className='h-12 w-56' variant='outline'>
+								<Button className='h-12 w-56' variant='outline' onClick={() => navigate('/register')}>
 									Create Account
 								</Button>
 							</div>

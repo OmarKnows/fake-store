@@ -3,7 +3,7 @@ import tw from '@/assets/twitter.png';
 
 const Footer = () => {
 	return (
-		<div className='flex justify-between py-10 px-12 bg-gray-800 mt-24 text-2xl flex-shrink-0'>
+		<div className='flex justify-between py-10 px-12 bg-gray-800 text-2xl flex-shrink-0'>
 			<div>
 				<div className='text-white font-light'>Fake Store</div>
 				<ul className='font-medium text-gray-600 ps-8 mt-5 list-disc'>
