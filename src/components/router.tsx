@@ -15,7 +15,7 @@ export const router = createBrowserRouter(
 			element={
 				<div className='flex flex-col min-h-screen'>
 					<NavBar />
-					<div className='flex-1'>
+					<div className='flex-1 mb-5'>
 						<Outlet />
 					</div>
 					<Footer />

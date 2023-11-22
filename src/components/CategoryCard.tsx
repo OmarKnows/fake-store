@@ -12,7 +12,7 @@ interface ICategoryCardProps {
 const CategoryCard: React.FC<ICategoryCardProps> = ({ category, loading }) => {
 	return (
 		<CustomLink disabled={loading} to={`${category?._id}`}>
-			<Card className='h-[324px] hover:scale-105 transition duration-500'>
+			<Card className='h-[324px] hover:scale-105 transition duration-500 overflow-hidden'>
 				<CardContent className='flex justify-center'>
 					<div className='h-[264px] w-[264px] overflow-hidden '>
 						{loading ? (
