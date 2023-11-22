@@ -12,9 +12,11 @@ export const router = createBrowserRouter(
 		<Route
 			path='/'
 			element={
-				<div className='flex flex-col'>
+				<div className='flex flex-col min-h-screen'>
 					<NavBar />
-					<Outlet />
+					<div className='flex-1'>
+						<Outlet />
+					</div>
 					<Footer />
 				</div>
 			}
