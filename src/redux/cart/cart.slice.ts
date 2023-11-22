@@ -27,6 +27,7 @@ export const getCart = createAsyncThunk('getCart', async (_, { rejectWithValue }
 		return data.data;
 	} catch (error) {
 		const err = error as AxiosError;
+		if (err.response?.status === 404) return initialState;
 		return rejectWithValue(err.response?.data);
 	}
 });
@@ -126,6 +127,7 @@ const cartSlice = createSlice({
 			})
 			.addCase(getCart.rejected, (state, action) => {
 				state.loading = false;
+				console.log(action);
 				state.error = action.payload as string | null;
 			})
 			.addCase(addToCart.pending, (state) => {
